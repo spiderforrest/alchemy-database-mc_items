@@ -1,7 +1,7 @@
 import { getItems } from './lib/supabase.js';
 import { renderItemCard } from './lib/render-utils.js';
 
-const listContainer = document.getElementById('dog-list-container');
+const listContainer = document.getElementById('list-container');
 
 window.addEventListener('load', async () => {
     const response = await getItems();
