@@ -1,5 +1,5 @@
-import { getItem } from '../fetch-utils.js';
-import { renderItemDetail } from '../render-utils.js';
+import { getItem } from '../lib/supabase.js';
+import { renderItemDetail } from '../lib/render-utils.js';
 
 const detailContainer = document.getElementById('detail-container');
 
