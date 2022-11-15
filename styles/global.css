@@ -40,3 +40,8 @@ main {
 h2 {
     color: var(--forground);
 }
+
+a:link,
+a:visited {
+    color: var(--forground);
+}

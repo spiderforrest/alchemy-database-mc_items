@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- metadata -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- title and favicon -->
+        <title>Spider's item db</title>
+        <link rel="icon" type="image/x-icon" href="assets/alchemy-favicon.png" />
+
+        <!-- js -->
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.35.7/dist/umd/supabase.min.js"
+        ></script>
+        <script type="module" src="app.js"></script>
+
+        <!-- fonts -->
+        <!-- see https://fonts.google.com/ -->
+
+        <!-- css -->
+        <link rel="stylesheet" href="../styles/reset.css" />
+        <link rel="stylesheet" href="../styles/global.css" />
+        <link rel="stylesheet" href="../styles/about.css" />
+        <!-- add link for page specific css -->
+    </head>
+
+    <body>
+        <header>
+            <a href="./">Home</a>
+            <a href="./about/">About</a>
+        </header>
+        <main>
+            <section class="main-section">
+                <h2>About the spidersort binary system</h2>
+                <h3>Background</h3>
+                <p>
+                    So, a good number of years ago I was at the
+                    <a href="https://livingcomputers.org/">Seattle Living Computers Museum</a>,
+                    looking at some
+                    <a href="https://en.wikipedia.org/wiki/Core_rope_memory">core rope memory</a>
+                    woven (entirely by women) for the Apollo missions. I had spend the ride there
+                    getting myself carsick playing Minecraft on the iphone 4s with no sim chip my
+                    parents had given me for this exact purpose, and was trying to deal with the
+                    output of one of the first efficient farms I ever made. Dragging items between
+                    chests with my grimy preteen fingers on a tiny touchscreen, I couldn't get
+                    anywhere near keeping up with the hundred thousand-ish mixed items per hour, and
+                    so I was trying to figure out a good solution to sort, store, and organize all
+                    the items. I'd heard the phrase "binary storage" once, so as I was staring at
+                    the little magnetized iron hoops, I thought "Hey, I could totally build this in
+                    minecraft." Then I realized I could use
+                    <strike>storage as an excuse to try that</strike> that to organize my storage
+                    system! By giving a binary code to every item, I can bypass the
+                    <strike>minor</strike> caveats of the more sane approaches to that problem! I've
+                    put at least a thousand hours into this <strike>terrible</strike> idea. Large
+                    portions of it work, but I've still never bothered to actually build it in my
+                    survival server, where it could deal with the assorted millions of items of
+                    items I have in horrible disorganized chest monsters, because on some level I've
+                    stopped pretending it's supposed to be a useful machine. I'm sure I'll get to it
+                    someday, but I've allowed it to get utterly swallowed by feature creep. I'm
+                    usually better than that, but this is a video game where I get the freedom to
+                    make a utopian perfect machine.
+                </p>
+                <h3>Protocol</h3>
+                <p>
+                    In 1.12, there's 592 obtainable, sortable items(right now! We recently got
+                    bedrock and end portal frames with some <em>crazy</em> exploits), so I use ten
+                    bits of binary to hold an address for each item. The addresses are actually a 3d
+                    coordinate matrix, with the first 3 bits for Y axis, the 4th for the Z axis, and
+                    the last 6 for the X axis. It can achieve insane sorting speeds by not actually
+                    sorting specific items-instead, it first groups items into packets of the same
+                    item(using a similar sorting algorithm to
+                    <a href="https://www.youtube.com/watch?v=0GoEgmkIWr0">this</a>, and then fetches
+                    the binary code associated with the packet. Then it determines where the packet
+                    belongs, based on fill levels of the chest hall, variable, fixed, and overflow
+                    bulks, etc, and moves it there. I'm currently stuck on a call system that takes
+                    an item and returns ~2000 of it. I'd like to get it to less than 4 seconds, but
+                    the bottleneck is determining the binary code of the item. You have to do
+                    comparisons between batches of 54 items(don't ask) that take 1/20th of a second
+                    each, and there's a lot of weird limitations preventing a direct binary search.
+                    I'll figure it out, eventually.
+                </p>
+            </section>
+        </main>
+    </body>
+</html>
