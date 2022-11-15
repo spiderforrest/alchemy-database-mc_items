@@ -1,8 +1,9 @@
 :root {
-    --background: rgb(224, 234, 247);
-    --header-background: rgb(254, 251, 245);
-    --primary-font: Corbel, 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans',
-        'Bitstream Vera Sans', 'Liberation Sans', Verdana, 'Verdana Ref', sans-serif;
+    --header-background: #201e1a;
+    --background: #242d36;
+    --forground: #fff;
+    --primary-font: 'Didact Gothic', Corbel, 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans',
+        'DejaVu Sans', 'Bitstream Vera Sans', 'Liberation Sans', Verdana, 'Verdana Ref', sans-serif;
 }
 
 body {
@@ -10,9 +11,11 @@ body {
     background: var(--background);
     display: grid;
     grid-template-rows: auto 1fr;
+    color: var(--foreground);
 }
 
 header {
+    color: var(--foreground);
     position: sticky;
     top: 0;
     padding: 15px;
@@ -32,4 +35,8 @@ header .logo {
 
 main {
     padding: 20px;
+}
+
+h2 {
+    color: var(--forground);
 }
