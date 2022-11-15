@@ -1,16 +1,14 @@
-/* Imports */
 import { getItems } from './lib/supabase.js';
+import { renderItemCard } from './lib/render-utils.js';
 
-/* Get DOM Elements */
-
-/* State */
-
-/* Events */
-
-/* Display Functions */
-
-// (don't forget to call any display functions you want to run on page load!)
+const listContainer = document.getElementById('dog-list-container');
 
 window.addEventListener('load', async () => {
-    console.log(await getItems());
+    const response = await getItems();
+    if (response.error) return;
+    // haha i usually use item for iterating an array but it's accurate here
+    for (const item of response.data) {
+        const div = renderItemCard(item);
+        listContainer.append(div);
+    }
 });
