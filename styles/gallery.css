@@ -1,0 +1,14 @@
+img {
+    width: 100%;
+    max-width: 1000px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+.main-section {
+    display: flex;
+    flex-direction: column;
+    max-width: 1000px;
+}

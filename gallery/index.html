@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- metadata -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- title and favicon -->
+        <title>Spider's item db</title>
+        <link rel="icon" type="image/x-icon" href="assets/alchemy-favicon.png" />
+
+        <!-- js -->
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.35.7/dist/umd/supabase.min.js"
+        ></script>
+        <script type="module" src="app.js"></script>
+
+        <!-- fonts -->
+        <!-- see https://fonts.google.com/ -->
+
+        <!-- css -->
+        <link rel="stylesheet" href="../styles/reset.css" />
+        <link rel="stylesheet" href="../styles/global.css" />
+        <link rel="stylesheet" href="../styles/gallery.css" />
+        <!-- add link for page specific css -->
+    </head>
+
+    <body>
+        <header>
+            <a href="../">Home</a>
+            <a href="../about/">About</a>
+            <a href="./">Gallery</a>
+        </header>
+        <main>
+            <section class="main-section">
+                <h2>Spidersort binary system gallery</h2>
+                <div></div>
+                <h3>Core memory NVRAM decoder</h3>
+                <p>
+                    An odd cross between real world
+                    <a href="https://en.wikipedia.org/wiki/Magnetic-core_memory"
+                        >magnetic core memory</a
+                    >
+                    and
+                    <a href="https://en.wikipedia.org/wiki/Core_rope_memory">core rope memory</a>,
+                    this decoder takes up 3x1x10 blocks per bit, and takes 3-4/10ths of a second to
+                    do, a read operation. The reads are non-destructive, but writing can only flip a
+                    bit, not set it, so the write signal is propagated backwards, requiring some odd
+                    external wiring. Unlikely I'll ever use it, but the idea was sweet.
+                </p>
+                <img src="../assets/coreNVRAM.png" />
+
+                <h3>Early prototype chest hall</h3>
+                <p>
+                    An early prototype for the chest hall. My biggest stretch goal for this system
+                    has been to have 12 chests per 'slice' of the chest hall-it's still 58ish meters
+                    long, with that many chests. Most systems only have 8, and I don't wanna walk
+                    that far.
+                </p>
+                <img src="../assets/prototypeHall.png" />
+
+                <h3>An old hall that was square</h3>
+                <p>
+                    In hindsight this hall has a million things wrong with it. I'd explored a bunch
+                    of fundamentally flawed ideas that with it that I've since abandoned. It's still
+                    my favorite looking version, though.
+                </p>
+                <img src="../assets/oldCube.png" />
+
+                <h3>Square hall tiled out</h3>
+                <img src="../assets/premodernHall.png" />
+                <h3>First working chest hall</h3>
+                <p>
+                    It was an insane moment the first time I dumped a packet of items into this hall
+                    and watched it pull the code from the item, select the right chest coordinates,
+                    read the fill levels on the chest, do the destination computation, organize the
+                    packet, feed the items to the chest, and shut itself back down. Took me more
+                    than a year to get there. 'Course, it was a slow, unreliable, piece of junk, but
+                    so much went into that-everything I build is extremely modular, so I got about a
+                    dozen really useful modules doing the R&D to get there.
+                </p>
+                <img src="../assets/workingChestHall.png" />
+
+                <h3>Bitmask based read only binary decoder</h3>
+                <p>
+                    This one might be the component I'm most proud of. Stateless binary decoders
+                    normally work by inverting the signal, then processing both S and S⁻¹ from
+                    separate rail lines in such a way to select only the correct slice. This design
+                    uses different timings to send both S and S⁻¹ on the same rail lines which
+                    allows for a smaller, faster(quarter second) decoder at the cost of some
+                    additional lag.
+                </p>
+                <img src="../assets/shrimple.png" />
+
+                <h3>Instant intermediate storage</h3>
+                <p>
+                    I've been working on a call system where you can throw an item on the ground in
+                    the chest hall, and it'll give you a packet of 1728 of that item. I don't wanna
+                    stand around waiting for it to process the item, so I've set myself a cutoff of
+                    4 seconds. However, bulk storages are always going to be slow, as they have
+                    different priorities, to handle moving and storing millions of items without
+                    causing lag. This stores up to 9 of those packets for each item, and uses
+                    <strike>exploits</strike> totally intended with update order to react instantly
+                    and effectively teleport packets to the player. From signal to item arriving,
+                    it's a quarter second.
+                </p>
+                <img src="../assets/reflexBulk.png" />
+                <h3>Planning hub</h3>
+                <p>
+                    Yeah, this makes sense to exactly one person ever, but it's a scale model of the
+                    facility, with notes, issues, ideas, teleport buttons, etc. I swear it's well
+                    organized.
+                </p>
+                <img src="../assets/planner.png" />
+                <h3>Sorted hall</h3>
+                <p>
+                    Honestly, this is super lazy, but it's the working plan for how the items will
+                    be sorted in the final chest hall. The position actually determines the code for
+                    the item, as the binary is actually a coordinate. (check the
+                    <a href="../about/">about page</a> for more info)
+                </p>
+                <img src="../assets/sorted.png" />
+                <h3>50ish versions of the chest hall</h3>
+                <p>
+                    I always fantasized about a minecraft version of git. You can probably see why.
+                </p>
+                <img src="../assets/scratchboard.png" />
+            </section>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,23 @@
+#list-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#list-container a div {
+    width: 200px;
+    height: 200px;
+    background-color: goldenrod;
+    margin: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#list-container a div img {
+    width: 64px;
+}
+
+h3 {
+    color: #fff;
+}
